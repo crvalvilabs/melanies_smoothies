@@ -19,7 +19,7 @@ my_dataframe = session.table('SMOOTHIES.PUBLIC.FRUIT_OPTIONS').select(col('SEARC
 
 # Convert the Snowpark Dataframe to a Pandas Dataframe so we can use the LOC function
 pd_df = my_dataframe.to_pandas()
-# st.dataframe(pd_df)
+st.dataframe(pd_df)
 
 name_on_order = st.text_input('Name on Smoothie:')
 st.write('The name on your Smoothie will be: ', name_on_order)
@@ -42,7 +42,7 @@ if ingredients_list:
       
         st.subheader(each_fruit = 'Nutrition Information')
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + search_on)
-        sf_df = st.dataframe(data=fruityvice_response.json(), use_dataframe_width=True)
+        fv_df = st.dataframe(data=fruityvice_response.json(), use_dataframe_width=True)
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""
